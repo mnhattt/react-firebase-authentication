@@ -1,8 +1,18 @@
 import React from 'react';
-import { doSignOut } from '../Firebase/auth'
+import { firebaseAuth } from '../Firebase'
+import { useHistory } from 'react-router-dom'
 
-export default () => (
-	<div>
-		<button onClick={() => doSignOut()}>sign out</button>
-	</div>
-)
+const SignOut = () => {
+	const history = useHistory()
+
+	const handleSignOut = () => {
+		firebaseAuth.signOut().then(() => history.push('/'))
+	}
+	return (
+		<div>
+			<button onClick={handleSignOut}>sign out</button>
+		</div>
+	)
+}
+
+export default SignOut

@@ -1,4 +1,4 @@
-import { authUserContext } from './context'
+import { AuthUserContext, withAuthentication } from './context'
 import { firebaseAuth } from './firebase';
 
-export { authUserContext, firebaseAuth }
+export { AuthUserContext, firebaseAuth, withAuthentication }

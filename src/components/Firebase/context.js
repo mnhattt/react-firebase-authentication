@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import { firebaseAuth } from '../Firebase'
 export const AuthUserContext = React.createContext(null)
 
-export const withAuthentication = Component => (
-	<AuthUserContext.Provider value={{}}>
-		<Component></Component>
-	</AuthUserContext.Provider>
-)
+export const withAuthentication = Component => () => {
+	const [user, setUser] = useState(null)
+
+	useEffect(() => {
+		firebaseAuth.onAuthStateChanged(authUser => {
+			setUser(authUser)
+		})
+	}, [])
+
+	return (
+		<AuthUserContext.Provider value={user}>
+			<Component />
+		</AuthUserContext.Provider>
+	)
+}
