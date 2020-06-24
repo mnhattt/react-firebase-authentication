@@ -1,5 +1,8 @@
 import firebase from 'firebase/app'
 import "firebase/auth";
+import 'firebase/database';
+
+import { createContext } from 'react'
 
 const firebaseConfig = {
 	apiKey: "AIzaSyAHaT1FW3tiQopAMDhOYHWkSTDoMhknlX8",
@@ -14,3 +17,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const firebaseAuth = firebase.auth();
+export const firebaseDB = firebase.database()
+
+export const FirebaseContext = createContext(firebase)

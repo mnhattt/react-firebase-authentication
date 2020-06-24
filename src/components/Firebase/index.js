@@ -1,3 +1,5 @@
 import { firebaseAuth } from './firebase';
 
-export { firebaseAuth }
+import * as auth from './auth'
+
+export { firebaseAuth, auth }

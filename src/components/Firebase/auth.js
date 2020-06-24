@@ -1,7 +1,13 @@
-import { firebaseAuth } from './firebase'
+import { firebaseAuth, firebaseDB } from './firebase'
 
-export const doSignInWithEmailAndPassword = (email, pass) => {
-	firebaseAuth.signInWithEmailAndPassword(email, pass)
+export const signInWithEmailAndPassword = (email, pass) => {
+	return firebaseAuth.signInWithEmailAndPassword(email, pass)
 }
 
-export const doSignOut = () => firebaseAuth.signOut();
+export const createUserWithEmailAndPassword = (email, pass) => {
+	return firebaseAuth.createUserWithEmailAndPassword(email, pass)
+}
+
+export const getUserById = (id) => firebaseDB.ref(`users/${id}`);
+
+export const signOut = () => firebaseAuth.signOut();

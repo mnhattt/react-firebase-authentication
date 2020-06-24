@@ -1,32 +1,50 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
-import { ACCOUNT, SIGN_IN, Sign_OUT, HOME, ADMIN, LANDING } from '../../constants/routes'
+import * as ROUTES from '../../constants/routes'
+import * as ROLES from '../../constants/roles';
 
+const Navigation = ({ authUser }) => (
+	console.log('authUser', authUser) ||
+		authUser ?
+		<NavigationAuth authUser={authUser} /> :
+		<NavigationNonAuth />
 
-export default ({ user }) => {
+);
 
-	return (
-		<div>
-			<ul>
-				<li>
-					<Link to={LANDING}>LANDING</Link>
-				</li>
-				<li>
-					{user !== null ? <Link to={Sign_OUT}>Sign_OUT</Link> : <Link to={SIGN_IN}>SIGN_IN</Link>}
-				</li>
-				{user &&
-					<>
-						< li >
-							<Link to={HOME}>Home</Link>
-						</li>
-						<li>
-							<Link to={ACCOUNT}>Account</Link>
-						</li>
-						<li>
-							<Link to={ADMIN}>ADMIN</Link>
-						</li>
-					</>
-				}
-			</ul>
-		</div>)
-}
+const NavigationAuth = ({ authUser }) => (
+	<ul>
+		<li>
+			<Link to={ROUTES.LANDING}>Landing</Link>
+		</li>
+		<li>
+			<Link to={ROUTES.HOME}>Home</Link>
+		</li>
+		<li>
+			<Link to={ROUTES.ACCOUNT}>Account</Link>
+		</li>
+		{!!authUser.roles[ROLES.ADMIN] && (
+			<li>
+				<Link to={ROUTES.ADMIN}>Admin</Link>
+			</li>
+		)}
+		<li>
+			<Link to={ROUTES.Sign_OUT}>Sign_OUT</Link>
+		</li>
+	</ul>
+);
+
+const NavigationNonAuth = () => (
+	<ul>
+		<li>
+			<Link to={ROUTES.LANDING}>Landing</Link>
+		</li>
+		<li>
+			<Link to={ROUTES.SIGN_IN}>Sign In</Link>
+		</li>
+		<li>
+			<Link to={ROUTES.SIGN_UP}>SIGN_UP</Link>
+		</li>
+	</ul>
+);
+
+export default Navigation;

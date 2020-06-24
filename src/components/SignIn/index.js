@@ -1,12 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import { firebaseAuth } from '../Firebase'
+import { auth } from '../Firebase'
 
 const SignIn = () => {
 	const history = useHistory()
 
 	const handleSignIn = () => {
-		firebaseAuth.signInWithEmailAndPassword("minhnhat10bk@gmail.com", "123456").then(() => {
+		auth.signInWithEmailAndPassword("minhnhat10bk@gmail.com", "123123").then(() => {
 			history.push('/')
 		})
 

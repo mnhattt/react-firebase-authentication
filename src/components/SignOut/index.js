@@ -1,16 +1,17 @@
 import React from 'react';
-import { firebaseAuth } from '../Firebase'
+import { auth } from '../Firebase'
 import { useHistory } from 'react-router-dom'
 
 const SignOut = () => {
 	const history = useHistory()
 
 	const handleSignOut = () => {
-		firebaseAuth.signOut().then(() => history.push('/'))
+		auth.signOut().then(() => history.push('/'))
 	}
+
 	return (
 		<div>
-			<button onClick={handleSignOut}>sign out</button>
+			<button type="button" onClick={handleSignOut}>Sign Out</button>
 		</div>
 	)
 }
