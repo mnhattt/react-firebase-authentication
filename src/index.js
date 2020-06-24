@@ -8,9 +8,6 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  // <firebaseContext.Provider>
-  //   <App />
-  // </firebaseContext.Provider>,
   document.getElementById('root')
 );
 

@@ -1,32 +1,33 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css';
 
-import { withAuthentication, AuthUserContext } from '../Firebase'
 
 import Navigation from '../Navigation'
 import * as ROUTES from '../../constants/routes';
 import LandingPage from '../Landing';
-import SignOut from '../SignOut';
+import SignOutPage from '../SignOut';
 import SignInPage from '../SignIn';
 // import PasswordForgetPage from '../PasswordForget';
 // import HomePage from '../Home';
 // import AccountPage from '../Account';
 // import AdminPage from '../Admin';
 
+import { useAuthenUser } from '../hooks'
+
 function App() {
-  console.log('app')
-  const user = useContext(AuthUserContext)
+
+  const {  authUser } = useAuthenUser()
 
   return (
     <div className="App">
       <Router>
-        <Navigation user={user} />
+        <Navigation user={authUser} />
         <hr />
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-        <Route path={ROUTES.Sign_OUT} component={SignOut} />
-        {user !== null &&
+        <Route path={ROUTES.Sign_OUT} component={SignOutPage} />
+        {authUser !== null &&
           <>
             <Route path={ROUTES.PASSWORD_FORGET} component={LandingPage} />
             <Route path={ROUTES.HOME} component={LandingPage} />
@@ -39,4 +40,4 @@ function App() {
   );
 }
 // export default App;
-export default withAuthentication(App);
+export default App;
