@@ -1,3 +1,3 @@
-import useAuthenUser from './useAuthenUser'
+import useAuthenUser from './useAuth'
 
 export { useAuthenUser }

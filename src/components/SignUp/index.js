@@ -32,15 +32,16 @@ const SignUpForm = () => {
 	const history = useHistory()
 
 	const onSubmit = (e) => {
-		const roles = {};
+		const roles = [];
 
 		if (isAdmin) {
-			roles[ROLES.ADMIN] = ROLES.ADMIN;
+			roles.push(ROLES.ADMIN);
 		}
 
 		auth.createUserWithEmailAndPassword(email, passwordOne)
 			.then(({ user: { uid } }) => {
 				const userRef = auth.getUserById(uid)
+				console.log('dbUser', roles)
 				userRef.set({ username, email, roles })
 				setUser(INITIAL_STATE)
 				history.push('/')

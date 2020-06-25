@@ -4,10 +4,10 @@ import { firebaseAuth, auth } from '../Firebase'
 
 function useAuthenUser() {
 	const [authUser, setAuthUser] = useState(null)
-
 	useEffect(() => {
-		firebaseAuth.onAuthStateChanged(authUser => {
+		const listener = firebaseAuth.onAuthStateChanged(authUser => {
 			if (authUser) {
+
 				auth.getUserById(authUser.uid).once('value').then(snapshot => {
 					const dbUser = snapshot.val();
 					const authenUser = {
@@ -17,10 +17,14 @@ function useAuthenUser() {
 						providerData: authUser.providerData,
 						...dbUser,
 					}
+					console.log('useAuthenUser authUser', authenUser)
 					setAuthUser(authenUser)
 				})
+			} else {
+				setAuthUser(false)
 			}
 		})
+		return () => listener()
 	}, [])
 
 	return { authUser }

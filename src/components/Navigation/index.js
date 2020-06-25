@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
 import * as ROLES from '../../constants/roles';
+import { useAuth } from '../util/authUserContext'
+const Navigation = () => {
+	const authUser = useAuth()
 
-const Navigation = ({ authUser }) => (
-	console.log('authUser', authUser) ||
-		authUser ?
+	return (authUser ?
 		<NavigationAuth authUser={authUser} /> :
-		<NavigationNonAuth />
-
-);
+		<NavigationNonAuth />)
+};
 
 const NavigationAuth = ({ authUser }) => (
 	<ul>
@@ -22,7 +22,7 @@ const NavigationAuth = ({ authUser }) => (
 		<li>
 			<Link to={ROUTES.ACCOUNT}>Account</Link>
 		</li>
-		{!!authUser.roles[ROLES.ADMIN] && (
+		{(authUser && authUser.roles && !!authUser.roles.includes(ROLES.ADMIN)) && (
 			<li>
 				<Link to={ROUTES.ADMIN}>Admin</Link>
 			</li>
