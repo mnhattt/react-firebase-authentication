@@ -7,4 +7,6 @@ const Admin = () => (
 	</div>
 )
 
-export default withAuthz(Admin)
+const rules = (user) => user.roles.includes('ADMINN')
+
+export default withAuthz(rules)(Admin)

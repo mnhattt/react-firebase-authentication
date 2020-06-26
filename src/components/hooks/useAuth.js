@@ -3,7 +3,8 @@ import { firebaseAuth, auth } from '../Firebase'
 
 
 function useAuthenUser() {
-	const [authUser, setAuthUser] = useState(null)
+	const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('authUser')))
+
 	useEffect(() => {
 		const listener = firebaseAuth.onAuthStateChanged(authUser => {
 			if (authUser) {
@@ -17,10 +18,12 @@ function useAuthenUser() {
 						providerData: authUser.providerData,
 						...dbUser,
 					}
-					console.log('useAuthenUser authUser', authenUser)
+					// console.log('useAuthenUser authUser', authenUser)
+					localStorage.setItem('authUser', JSON.stringify(authenUser));
 					setAuthUser(authenUser)
 				})
 			} else {
+				localStorage.removeItem('authUser');
 				setAuthUser(false)
 			}
 		})
