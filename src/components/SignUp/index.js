@@ -4,6 +4,11 @@ import { auth } from '../Firebase'
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const INITIAL_STATE = {
 	username: '',
@@ -63,53 +68,93 @@ const SignUpForm = () => {
 		setUser({ ...user, [e.target.name]: e.target.checked })
 	}
 
-
 	return (
-		<form onSubmit={onSubmit}>
-			<input
-				name="username"
-				value={username}
-				onChange={onChange}
-				type="text"
-				placeholder="Full Name"
-			/>
-			<input
-				name="email"
-				value={email}
-				onChange={onChange}
-				type="text"
-				placeholder="Email Address"
-			/>
-			<input
-				name="passwordOne"
-				value={passwordOne}
-				onChange={onChange}
-				type="password"
-				placeholder="Password"
-			/>
-			<input
-				name="passwordTwo"
-				value={passwordTwo}
-				onChange={onChange}
-				type="password"
-				placeholder="Confirm Password"
-			/>
-			<label>
-				Admin:
-          <input
-					name="isAdmin"
-					type="checkbox"
-					checked={isAdmin}
-					onChange={onChangeCheckbox}
-				/>
-			</label>
-			<button type="submit">
-				Sign Up
-        </button>
+		<Form>
+			<Row>
+				<Col>
+					<Form.Group controlId="formBasicEmail">
+						<Form.Label>Email address</Form.Label>
+						<Form.Control type="email" placeholder="Enter email" />
+						<Form.Text className="text-muted">
+							We'll never share your email with anyone else.
+			    </Form.Text>
+					</Form.Group>
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Form.Group controlId="formBasicPassword">
+						<Form.Label>Password</Form.Label>
+						<Form.Control type="password" placeholder="Password" />
+					</Form.Group>
+				</Col>
+			</Row>
+			<Col>
+				<Form.Group controlId="formBasicCheckbox">
+					<Form.Check type="checkbox" label="Check me out" />
+				</Form.Group>
+			</Col>
 
-			{error && <p>{error.message}</p>}
-		</form>
+			<Row className="justify-content-around">
+				<Col md={{ span: 0, offset: 2 }}>
+					<Button variant="primary" type="submit">
+						Submit
+			  	</Button>
+				</Col>
+				<Col md={{ span: 2, offset: 0 }}>
+					<Button variant="primary">
+						Cancle
+			  	</Button>
+				</Col>
+			</Row>
+		</Form>
 	)
+	// return (
+	// 	<form onSubmit={onSubmit}>
+	// 		<input
+	// 			name="username"
+	// 			value={username}
+	// 			onChange={onChange}
+	// 			type="text"
+	// 			placeholder="Full Name"
+	// 		/>
+	// 		<input
+	// 			name="email"
+	// 			value={email}
+	// 			onChange={onChange}
+	// 			type="text"
+	// 			placeholder="Email Address"
+	// 		/>
+	// 		<input
+	// 			name="passwordOne"
+	// 			value={passwordOne}
+	// 			onChange={onChange}
+	// 			type="password"
+	// 			placeholder="Password"
+	// 		/>
+	// 		<input
+	// 			name="passwordTwo"
+	// 			value={passwordTwo}
+	// 			onChange={onChange}
+	// 			type="password"
+	// 			placeholder="Confirm Password"
+	// 		/>
+	// 		<label>
+	// 			Admin:
+	//         <input
+	// 				name="isAdmin"
+	// 				type="checkbox"
+	// 				checked={isAdmin}
+	// 				onChange={onChangeCheckbox}
+	// 			/>
+	// 		</label>
+	// 		<button type="submit">
+	// 			Sign Up
+	//       </button>
+
+	// 		{error && <p>{error.message}</p>}
+	// 	</form>
+	// )
 }
 
 // const SignUpLink = () => (
@@ -119,10 +164,14 @@ const SignUpForm = () => {
 // );
 
 const SignUpPage = () => (
-	<div>
-		<h1>SignUp</h1>
-		<SignUpForm />
-	</div>
+	<Row className="justify-content-md-center">
+		<Col xs="8" md="6" lg="6">
+			<Jumbotron>
+				<h1>SignUp</h1>
+				<SignUpForm />
+			</Jumbotron>
+		</Col>
+	</Row>
 );
 
 export default SignUpPage;

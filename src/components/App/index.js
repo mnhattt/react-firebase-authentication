@@ -10,8 +10,7 @@ import LandingPage from '../Landing';
 import SignOutPage from '../SignOut';
 import SignInPage from '../SignIn';
 import SignUpPage from '../SignUp';
-// import PasswordForgetPage from '../PasswordForget';
-// import HomePage from '../Home';
+import Container from 'react-bootstrap/Container';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 // import withAuthz from '../util/withAuthz'
@@ -20,7 +19,7 @@ import AdminPage from '../Admin';
 
 function App() {
   return (
-    <div className="App">
+    <Container className="App">
       <Router>
         <Navigation />
         <hr />
@@ -31,7 +30,7 @@ function App() {
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.ADMIN} component={AdminPage} />
       </Router>
-    </div >
+    </Container >
   );
 }
 
